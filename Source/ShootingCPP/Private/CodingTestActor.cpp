@@ -22,6 +22,26 @@ void ACodingTestActor::BeginPlay()
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *name);
 	UE_LOG(LogTemp, Warning, TEXT("%d"), isReady);	
 	UE_LOG(LogTemp, Warning, TEXT("Add 결과: %d"), AddCustom(number3, number4));
+	
+	// 조건문
+	if (number3 > 50)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%d(number3)은 50부다 큽니다."), number3);
+	}
+	else if (number3 == 50)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%d(number3)은 50입니다."), number3);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%d(number3)은 50부다 작습니다."), number3);
+	}
+	
+	// 반복문
+	for (int32 i=1;i<=5;i++)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("반복 %d회"), i);
+	}
 }
 
 // Called every frame
@@ -36,3 +56,4 @@ int32 ACodingTestActor::AddCustom(int32 a, int32 b)
 	int32 result = a + b;
 	return result;
 }
+
