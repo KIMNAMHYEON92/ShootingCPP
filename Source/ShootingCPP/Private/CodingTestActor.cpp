@@ -20,7 +20,8 @@ void ACodingTestActor::BeginPlay()
 	UE_LOG(LogTemp, Warning, TEXT("%d"), number1);
 	UE_LOG(LogTemp, Warning, TEXT("%.2f"), number2);
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *name);
-	UE_LOG(LogTemp, Warning, TEXT("%d"), isReady);
+	UE_LOG(LogTemp, Warning, TEXT("%d"), isReady);	
+	UE_LOG(LogTemp, Warning, TEXT("Add 결과: %d"), Add(number3, number4));
 }
 
 // Called every frame
@@ -30,3 +31,8 @@ void ACodingTestActor::Tick(float DeltaTime)
 
 }
 
+int32 ACodingTestActor::Add(int32 a, int32 b)
+{
+	int32 result = a + b;
+	return result;
+}
