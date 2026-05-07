@@ -22,4 +22,16 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	
+	// 생성할 적 불루프린트
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AEnemyActor> enemy;
+	
+	// 생성 간격(초)
+	UPROPERTY(EditAnywhere)
+	float delayTime = 2.0f;
+	
+private:
+	// 현재 시간을 누적할 시간측정용 변수 (외부 간섭 방지)
+	float currentTime = 0;
 };
