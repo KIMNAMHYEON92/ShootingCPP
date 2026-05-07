@@ -44,10 +44,28 @@ public:
 	
 	UPROPERTY(EditAnywhere)
 	class UInputAction* iaVertical;
+		
+	UPROPERTY(EditAnywhere)
+	class UInputAction* iaFire;
 	
 	// 이동 속도 변수
 	UPROPERTY(EditAnywhere)
 	float moveSpeed = 500.0f;
+	
+	// 총알 발사 위치(총구)
+	UPROPERTY(EditAnywhere)
+	class UArrowComponent* firePosition; // UArrowComponent는 직선상 경로를 활용하는 클래스
+	
+	// 생성할 총알 블루프린트
+	// 월드에 배치하지 않은 원본파일을 변수에 할당하기 위해서 TSubclassOf<T> 타입 사용
+	// <T>에 생성될 블루프린트가 상속한 Actor 클래스를 넣어준다.
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class ABullet> bulletFactory; 
+	
+	// 발사 효과음
+	UPROPERTY(EditAnywhere)
+	class USoundBase* fireSound;
+
 	
 private:
 	// 상요자 키 입력값을 받을 변수
@@ -57,4 +75,6 @@ private:
 	// 입력 이벤트 발동 시 실행될 함수
 	void OnInputHorizontal(const struct FInputActionValue& value);
 	void OnInputVertical(const struct FInputActionValue& value);
+	
+	void Fire();
 };
