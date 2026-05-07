@@ -32,9 +32,11 @@ public:
 	UPROPERTY(EditAnywhere)
 	float moveSpeed = 600.0f;
 	
+	// 플레이어 추적 확률 (0~100)
 	UPROPERTY(EditAnywhere)
-	int32 traceRate = 30;
+	int32 traceRate = 50;
 	
 private:
+	// 방향
 	FVector dir;
 };
