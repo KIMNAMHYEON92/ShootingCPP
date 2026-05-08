@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/TextBlock.h"
 #include "MainWidget.generated.h"
 
 /**
@@ -13,4 +14,17 @@ UCLASS()
 class SHOOTINGCPP_API UMainWidget : public UUserWidget
 {
 	GENERATED_BODY()
+	
+public:
+	// 점수 텍스트 컴포넌트 - 언리얼에디터 위젯 BP에서 같은 이름으로 바인딩 됨
+	// meta 파라미터 옵션은 정보데이터 옵션으로, 
+	// 변수 노출 시킬 때, 코드와 이름을 다르게 하거나, 
+	// 입력값을 특정 범위로 제한하는 등의 목적으로 사용
+	UPROPERTY(EditAnywhere, meta = (BindWidget)) 
+	class UTextBlock* scoreText;
+	
+	// 점수 UI 갱신 변수
+	UPROPERTY(EditAnywhere, meta = (BindWidget))
+	class UTextBlock* scoreData;
+	
 };
