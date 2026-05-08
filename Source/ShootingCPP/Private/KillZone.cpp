@@ -3,12 +3,24 @@
 
 #include "KillZone.h"
 
+#include "Components/BoxComponent.h"
+
 
 // Sets default values
 AKillZone::AKillZone()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	// Tick()이 필요없는 actor에는 항상 false로 설정
+	PrimaryActorTick.bCanEverTick = false;
+	
+	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("KZBoxComponent"));
+	SetRootComponent(boxComp);
+	
+	// 박스 모빌리티 고정으로 설정
+	boxComp->SetMobility(EComponentMobility::Static);
+	
+	FVector boxSize = FVector(50.0f,2000.0f,50.0f);
+	boxComp->SetBoxExtent(boxSize);
+	boxComp->SetCollisionProfileName(TEXT("KillZone"));
 }
 
 // Called when the game starts or when spawned
@@ -16,11 +28,13 @@ void AKillZone::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	boxComp->OnComponentBeginOverlap.AddDynamic(this, &AKillZone::OnKillZoneOverlap);
 }
 
-// Called every frame
-void AKillZone::Tick(float DeltaTime)
+void AKillZone::OnKillZoneOverlap(
+		UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, 
+		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult
+		)
 {
-	Super::Tick(DeltaTime);
+	OtherActor->Destroy();
 }
-

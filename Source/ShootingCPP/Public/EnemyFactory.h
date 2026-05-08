@@ -34,4 +34,5 @@ public:
 private:
 	// 현재 시간을 누적할 시간측정용 변수 (외부 간섭 방지)
 	float currentTime = 0;
+	float randomSpawnDelay = 0;
 };

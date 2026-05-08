@@ -17,7 +17,7 @@ AEnemyFactory::AEnemyFactory()
 void AEnemyFactory::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	randomSpawnDelay = FMath::RandRange(0,100);
 }
 
 // Called every frame
@@ -29,9 +29,11 @@ void AEnemyFactory::Tick(float DeltaTime)
 	currentTime += DeltaTime;
 	
 	// 누적시간이 설정한 딜레이보다 커지면,
-	if (currentTime >= delayTime)
+	if (currentTime >= (delayTime+(randomSpawnDelay/100)))
 	{
 		currentTime = 0; // 누적시간 초기화
+		
+		randomSpawnDelay = FMath::RandRange(0,100);
 		
 		// enemy 액터 생성
 		AEnemyActor* spawnActor = GetWorld()->SpawnActor<AEnemyActor>(enemy,GetActorLocation(),GetActorRotation());

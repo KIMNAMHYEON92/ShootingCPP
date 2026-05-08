@@ -14,4 +14,9 @@ class SHOOTINGCPP_API AShootingGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	void AddScore(int32 point);
+	
+private:
+	int32 currentScore;
 };

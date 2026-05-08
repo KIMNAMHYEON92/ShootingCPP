@@ -5,6 +5,7 @@
 
 #include "EnemyActor.h"
 #include "NiagaraFunctionLibrary.h"
+#include "ShootingGameModeBase.h"
 #include "Components/BoxComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -67,9 +68,18 @@ void ABullet::OnBulletOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 	{
 		// 충돌 위치에 폭발 파티클 이펙트를 스폰
 		//UGameplayStatics::SpawnEmitterAtLocation(GetWorld(),explosionFX,GetActorTransform().GetLocation()); // 구버전
-		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(),explosionFX,GetActorLocation());
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(),explosionFX,GetActorLocation());		
 		// 충돌한 Enemy 제거
 		OtherActor->Destroy();
+		
+		// 현재 게임 모드 베이스 가져오기
+		AGameModeBase* curruntGameMode = GetWorld()->GetAuthGameMode();
+		// AddScore 함수 호출
+		AShootingGameModeBase* currentGameModeBase = Cast<AShootingGameModeBase>(curruntGameMode);
+		if (currentGameModeBase != nullptr)
+		{
+			currentGameModeBase->AddScore(1);
+		}
 	}
 	// 총알 자신 제거
 	Destroy();
