@@ -5,6 +5,7 @@
 
 #include "EngineUtils.h"
 #include "PlayerPawn.h"
+#include "ShootingGameModeBase.h"
 #include "Components/BoxComponent.h"
 
 
@@ -73,6 +74,13 @@ void AEnemyActor::OnEnemyOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	if (player != nullptr)
 	{
 		OtherActor->Destroy();
+		
+		// 게임 오버 메뉴 ShowMenu() 함수 호출
+		AShootingGameModeBase* currentGameModeBase = Cast<AShootingGameModeBase>(GetWorld()->GetAuthGameMode());
+		if (currentGameModeBase != nullptr)
+		{
+			currentGameModeBase->ShowMenu();
+		}
 	}
 	Destroy();
 }
