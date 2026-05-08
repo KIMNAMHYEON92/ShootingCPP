@@ -21,6 +21,7 @@ AEnemyActor::AEnemyActor()
 	FVector boxSize = FVector(50.0f, 50.0f, 50.0f);
 	boxComp->SetBoxExtent(boxSize);
 	
+	boxComp->SetCollisionProfileName(TEXT("Enemy"));
 }
 
 // Called when the game starts or when spawned

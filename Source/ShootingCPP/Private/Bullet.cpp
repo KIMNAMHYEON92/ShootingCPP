@@ -30,6 +30,8 @@ ABullet::ABullet()
 	
 	// 박스 콜리전 자식으로 스태틱 메시 컴포넌트 설정
 	meshComp->SetupAttachment(boxComp);
+		
+	boxComp->SetCollisionProfileName(TEXT("Bullet"));
 }
 
 // Called when the game starts or when spawned
